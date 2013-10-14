@@ -1,3 +1,5 @@
 usr/include
 usr/lib/libvarnishapi.so
 usr/lib/pkgconfig/*.pc
+usr/share/aclocal
+usr/share/varnish
