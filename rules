@@ -34,9 +34,10 @@ override_dh_auto_configure:
 override_dh_auto_install:
 	dh_auto_install -a
 	@ # Install the example as default.
-	mkdir -p $(CURDIR)/debian/varnish/etc/
+	mkdir -p $(CURDIR)/debian/tmp/etc/varnish/
 	install -o root -g root -m 644 $(CURDIR)/etc/example.vcl \
-		$(CURDIR)/debian/varnish/etc/default.vcl
+		$(CURDIR)/debian/tmp/etc/varnish/default.vcl
+	rm $(CURDIR)/debian/tmp/usr/share/doc/varnish/*vcl
 	@ # Remove .la files
 	@ # (See http://wiki.debian.org/ReleaseGoals/LAFileRemoval)
 	find $(CURDIR)/debian/ -name \*.la -delete

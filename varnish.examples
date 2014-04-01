@@ -1,1 +1,1 @@
-bin/varnishd/default.vcl
+bin/varnishd/builtin.vcl
