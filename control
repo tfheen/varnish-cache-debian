@@ -13,6 +13,7 @@ Build-Depends:
  autotools-dev,
  debhelper (>= 7.0.50~),
  libedit-dev,
+ libjemalloc-dev,
  libncurses-dev,
  libpcre3-dev,
  libtool,
