@@ -29,8 +29,7 @@ Package: varnish
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, gcc (>= 3.3), libc6-dev | libc6.1-dev | libc-dev, adduser, libvarnishapi1 (>= ${binary:Version})
 Suggests: varnish-doc
-Provides: ${Varnish:ABI}
-Provides: ${Varnish:strictABI}
+Provides: varnish, ${Varnish:ABI}, ${Varnish:strictABI}
 Description: state of the art, high-performance web accelerator
  Varnish Cache is a state of the art web accelerator written with
  performance and flexibility in mind.
