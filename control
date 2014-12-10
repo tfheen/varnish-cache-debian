@@ -11,7 +11,6 @@ Build-Depends:
  automake,
  autotools-dev,
  debhelper (>= 9),
- dh-autoreconf,
  libedit-dev,
  libjemalloc-dev,
  libncurses-dev,
