@@ -20,7 +20,7 @@ NAME=varnishd
 DESC="HTTP accelerator"
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/varnishd
-PIDFILE=/var/run/$NAME.pid
+PIDFILE=/run/$NAME.pid
 
 test -x $DAEMON || exit 0
 
@@ -73,6 +73,15 @@ stop_varnishd() {
     else
         log_end_msg 1
     fi
+
+    if test -r $PIDFILE; then
+        read -r PID < $PIDFILE
+        if test ! -d /proc/$PID ; then
+            # stale pidfile
+            unset PID
+            rm -f $PIDFILE
+        fi
+    fi
 }
 
 reload_varnishd() {
@@ -85,9 +94,17 @@ reload_varnishd() {
 }
 
 status_varnishd() {
-    status_of_proc -p "${PIDFILE}" "${DAEMON}" "${NAME}"
+    start-stop-daemon \
+        --status --quiet --pidfile $PIDFILE \
+        --exec $DAEMON
     exit $?
 }
+
+configtest() {
+    $DAEMON ${DAEMON_OPTS} -C -n /tmp > /dev/null
+}
+
+
 
 case "$1" in
     start)
@@ -110,13 +127,20 @@ case "$1" in
         status_varnishd
         ;;
     restart|force-reload)
+	if status_of_proc -p "${PIDFILE}" "${DAEMON}" "${NAME}" 1>/dev/null; then
+	    if ! configtest; then
+		log_failure_msg "Syntax check failed, not restarting"
+		exit 1
+	    fi
+	fi
         $0 stop
         $0 start
         ;;
+    configtest)
+        configtest && log_success_msg "Syntax ok"
+        ;;
     *)
-        log_success_msg "Usage: $0 {start|stop|restart|force-reload}"
+        log_success_msg "Usage: $0 {start|stop|restart|reload|force-reload|configtest}"
         exit 1
         ;;
 esac
-
-exit 0

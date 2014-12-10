@@ -2,9 +2,8 @@
 
 DH_VERBOSE=1
 
-# List of architectures that lack the *_2POW definitions in varnish,
-# which is needed by jemalloc
-DISABLE_JEMALLOC_ARCH_LIST := hppa s390 sparc m68k
+# List of architectures where jemalloc is not available
+DISABLE_JEMALLOC_ARCH_LIST := hppa m68k
 
 # Explicitly initialize a variable to select architecture, unless it has been
 # defined before.  This is compared against the DISABLE_*_LIST variables later
@@ -27,7 +26,7 @@ VMOD_ABI = $(shell printf '\#include "vrt.h"\nvarnishabi- VRT_MAJOR_VERSION . VR
 
 # Main build rule, leave everything to debhelper
 %:
-	dh $@ --parallel
+	dh $@ --parallel --with=systemd,autoreconf
 
 ifeq (,$(filter test,$(LOCAL_BUILD_OPTIONS)))
 # Disable automated build tests
@@ -40,11 +39,8 @@ override_dh_auto_configure:
 
 override_dh_auto_install:
 	dh_auto_install -a
-	@ # Install the example as default.
-	mkdir -p $(CURDIR)/debian/tmp/etc/varnish/
-	install -o root -g root -m 644 $(CURDIR)/etc/example.vcl \
-		$(CURDIR)/debian/tmp/etc/varnish/default.vcl
-	rm $(CURDIR)/debian/tmp/usr/share/doc/varnish/*vcl
+	install -d debian/tmp/etc/varnish
+	install -T -m 0644 etc/example.vcl debian/tmp/etc/varnish/default.vcl
 	@ # Remove .la files
 	@ # (See http://wiki.debian.org/ReleaseGoals/LAFileRemoval)
 	find $(CURDIR)/debian/ -name \*.la -delete
