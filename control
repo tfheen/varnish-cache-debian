@@ -12,7 +12,6 @@ Build-Depends:
  autotools-dev,
  debhelper (>= 9),
  dh-autoreconf,
- dh-systemd,
  libedit-dev,
  libjemalloc-dev,
  libncurses-dev,
@@ -20,7 +19,7 @@ Build-Depends:
  libtool,
  pkg-config,
  python-docutils,
- python-sphinx,
+ python-sphinx
 Vcs-Browser: http://git.debian.org/?p=pkg-varnish/pkg-varnish.git;a=summary
 Vcs-Git: git://git.debian.org/pkg-varnish/pkg-varnish.git
 Homepage: http://varnish-cache.org/
