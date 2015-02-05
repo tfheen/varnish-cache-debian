@@ -8,6 +8,11 @@ case "$1" in
 
         remove|failed-upgrade|abort-install|abort-upgrade|disappear)
 
+        if dpkg-statoverride --list /var/log/varnish >/dev/null; then
+            dpkg-statoverride --remove /var/log/varnish || true
+
+        fi
+
         if test -e /var/log/varnish ; then
 
             rm -r /var/log/varnish > /dev/null 2>&1 || exit 78
@@ -35,6 +40,7 @@ case "$1" in
         fi
 
         rm -f /etc/varnish/secret
+        dpkg-statoverride --remove /var/log/varnish || true
 
         ;;
 
