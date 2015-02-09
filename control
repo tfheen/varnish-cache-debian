@@ -1,12 +1,7 @@
 Source: varnish
 Section: web
 Priority: optional
-Maintainer: Varnish Package Maintainers <pkg-varnish-devel@lists.alioth.debian.org>
-Uploaders:
- Jan Wagner <waja@cyconet.org>,
- Lars Bahner <bahner@debian.org>,
- Stig Sandbeck Mathisen <ssm@debian.org>,
- Tollef Fog Heen <tfheen@debian.org>,
+Maintainer: Varnish Package Maintainers <varnish-dist@varnish-cache.org>
 Build-Depends:
  automake,
  autotools-dev,
@@ -19,9 +14,8 @@ Build-Depends:
  pkg-config,
  python-docutils,
  python-sphinx
-Vcs-Browser: http://git.debian.org/?p=pkg-varnish/pkg-varnish.git;a=summary
-Vcs-Git: git://git.debian.org/pkg-varnish/pkg-varnish.git
-Homepage: http://varnish-cache.org/
+Vcs-Git:  git://git.varnish-cache.org/varnish-cache-debian.git
+Homepage: https://varnish-cache.org/
 Standards-Version: 3.9.6
 
 Package: varnish
