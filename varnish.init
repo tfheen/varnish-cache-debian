@@ -101,9 +101,12 @@ status_varnishd() {
 }
 
 configtest() {
-    $DAEMON ${DAEMON_OPTS} -C -n /tmp > /dev/null
+    $DAEMON ${DAEMON_OPTS} -C -n /tmp 2>/dev/null
+    if [ "$?" != 0 ]; then
+        $DAEMON ${DAEMON_OPTS} -C -n /tmp
+        return $?
+    fi
 }
-
 
 
 case "$1" in
