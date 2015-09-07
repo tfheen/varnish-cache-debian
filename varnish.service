@@ -1,5 +1,5 @@
 [Unit]
-Description=Varnish HTTP accelerator
+Description=Varnish Cache HTTP accelerator
 
 [Service]
 Type=forking

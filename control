@@ -59,7 +59,7 @@ Conflicts: libvarnish1
 Pre-Depends: multiarch-support
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: shared libraries for Varnish
- Shared libraries for the Varnish HTTP accelerator.
+ Shared libraries for Varnish Cache HTTP accelerator.
 
 Package: libvarnishapi-dev
 Section: libdevel
@@ -68,7 +68,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, libvarnishapi1 (= ${binary:Version}
 Provides: libvarnish-dev
 Conflicts: libvarnish-dev
 Description: development files for Varnish
- Development files for the Varnish HTTP accelerator.
+ Development files for Varnish Cache HTTP accelerator.
 
 Package: varnish-dbg
 Section: debug
@@ -77,7 +77,7 @@ Architecture: any
 Depends: varnish (= ${binary:Version}),
          ${misc:Depends}
 Description: debugging symbols for varnish
- This package contains the detached debugging symbols for varnish.
+ This package contains the detached debugging symbols for Varnish Cache.
  .
  Varnish Cache is a state of the art web accelerator written with
  performance and flexibility in mind.
